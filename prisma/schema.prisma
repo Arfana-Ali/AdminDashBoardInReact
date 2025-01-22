@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Roles {
+  ADMIN
+  USER
+  MODERATOR
+}
+
+enum TaskStatus {
+  isPending
+  isComplete
+  isCancelled
+}
+
+model Users {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  firstName String
+  lastName  String
+  username  String   @unique
+  password  String
+  city      String 
+  role      Roles @default(USER)
+  tasks     Tasks[]
+}
+
+model Tasks {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  vehicleNumber String
+  ownerName String
+  ownerPhone  String
+  selectCities String
+  uploadedImage String? 
+  taskStatus TaskStatus @default(isPending)
+  author    Users   @relation(fields: [authorId], references: [id])
+  authorId  String @db.ObjectId
+}
