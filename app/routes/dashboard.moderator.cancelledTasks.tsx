@@ -2,7 +2,7 @@ import { LoaderFunctionArgs } from "@remix-run/node";
 import prisma from "~/utils/db";
 import { requireUser } from "~/utils/gaurds.server";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 import { redirect, useLoaderData, Form as F, Link } from "@remix-run/react";
 import { Button } from "~/components/ui/button";

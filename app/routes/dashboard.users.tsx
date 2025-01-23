@@ -50,7 +50,7 @@ import { Button } from "~/components/ui/button";
 
 // Animation imports
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import prisma from "~/utils/db";
 import { Label } from "~/components/ui/label";
 import { toast } from "sonner";

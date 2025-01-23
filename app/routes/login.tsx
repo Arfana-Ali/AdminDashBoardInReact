@@ -19,7 +19,7 @@ import { Label } from "~/components/ui/label";
 
 // Animation imports
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function login() {
   return (

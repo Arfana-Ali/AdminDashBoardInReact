@@ -17,7 +17,7 @@ import * as z from "zod";
 import prisma from "~/utils/db";
 import { Button } from "~/components/ui/button";
 import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useEffect } from "react";
 import { toast } from "sonner";
 

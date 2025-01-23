@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import BarChartComponent from "~/components/barchartcomponent";
 import { Button } from "~/components/ui/button";
 import {

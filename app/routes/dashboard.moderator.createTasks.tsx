@@ -26,7 +26,7 @@ import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { FormControl, FormField, FormItem, Form } from "~/components/ui/form";
 import { useForm } from "react-hook-form";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
