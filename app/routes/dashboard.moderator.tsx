@@ -1,130 +1,28 @@
-import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 import { requireUser } from "~/utils/gaurds.server";
 import {
   redirect,
   useLoaderData,
-  useSubmit,
   Form as F,
-  useActionData,
   Link,
   Outlet,
 } from "@remix-run/react";
-
-import { FormDataSchema } from "~/lib/schema";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import prisma from "~/utils/db";
 import { Button } from "~/components/ui/button";
-import { useForm } from "react-hook-form";
 import { motion } from "motion/react";
-import { useEffect } from "react";
-import { toast } from "sonner";
-
-type FormData = z.infer<typeof FormDataSchema>;
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const loggedinUser = await requireUser(request);
 
-  if (!loggedinUser) {
+  if (!loggedinUser || loggedinUser?.role !== "MODERATOR") {
     return redirect("/login");
   }
 
-  const usersOptions = await prisma.users.findMany({
-    where: {
-      role: "USER",
-    },
-    select: {
-      id: true,
-      firstName: true,
-      lastName: true,
-      city: true,
-    },
-  });
-
-  const selectCities = ["bhopal", "indore", "jabalpur", "gwalior", "sagaur"];
-
-  const citiesWithUsersOption = usersOptions.reduce((acc: any, user) => {
-    if (!acc[user.city]) acc[user.city] = [];
-    acc[user.city].push(user);
-    return acc;
-  }, {});
-
-  return { loggedinUser, citiesWithUsersOption, selectCities };
-};
-
-export const action = async ({ request }: ActionFunctionArgs) => {
-  const formData = await request.json();
-
-  if (formData) {
-    const createdTask = await prisma.tasks.create({
-      data: {
-        vehicleNumber: formData.vehicleNumber,
-        ownerName: formData.ownerName,
-        ownerPhone: formData.ownerPhone,
-        selectCities: formData.selectedCity,
-        authorId: formData.selectEmployee,
-      },
-    });
-
-    if (createdTask) {
-      const toastMessage = "Task created sucessfully";
-      return { toastMessage, success: true };
-    }
-    if (!createdTask) {
-      const toastMessage =
-        "Something went wrong. Please try again after sometime.";
-      return { toastMessage, success: false };
-    }
-  }
+  return { loggedinUser };
 };
 
 export default function ModeratorPage() {
   const data = useLoaderData<typeof loader>();
-  const { loggedinUser, citiesWithUsersOption, selectCities } = data;
-
-  const form = useForm<z.infer<typeof FormDataSchema>>({
-    resolver: zodResolver(FormDataSchema),
-    defaultValues: {
-      vehicleNumber: "",
-      ownerName: "",
-      ownerPhone: "",
-      selectCities: "",
-      selectEmployee: "",
-    },
-  });
-
-  // handeling toast notification
-  const actionData = useActionData<typeof action>();
-  const toastMessage = actionData?.toastMessage;
-  const success = actionData?.success;
-
-  useEffect(() => {
-    if (toastMessage && success === true) {
-      toast.success(toastMessage, { duration: 5000 });
-      window.location.reload();
-    } else toast.error(toastMessage, { duration: 5000 });
-  }, [toastMessage]);
-
-  const selectedCity = form.watch("selectCities");
-  const availableEmployees = selectedCity
-    ? citiesWithUsersOption[selectedCity] || []
-    : [];
-
-  const submit = useSubmit();
-
-  const onSubmit = async (data: FormData) => {
-    await submit(
-      {
-        vehicleNumber: data.vehicleNumber,
-        ownerName: data.ownerName,
-        ownerPhone: data.ownerPhone,
-        selectedCity: data.selectCities,
-        selectEmployee: data.selectEmployee,
-      },
-      { method: "POST", encType: "application/json" }
-    );
-  };
+  const { loggedinUser } = data;
 
   if (loggedinUser.role === "MODERATOR") {
     return (

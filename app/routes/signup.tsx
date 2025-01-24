@@ -35,7 +35,7 @@ export default function signup() {
     <div className="w-full h-screen overflow-hidden flex bg-gray-900">
       <div className="bg-white w-[2800px] h-[1190px] mt-[-20px] relative right-[-45rem]"></div>
       <motion.div
-        className="flex flex-col"
+        className="hidden sm:flex sm:flex-col"
         variants={{
           hidden: { opacity: 0, x: 100 },
           visible: { opacity: 1, x: 0 },
@@ -55,7 +55,7 @@ export default function signup() {
         </p>
       </motion.div>
       <motion.div
-        className="mt-[20rem] relative right-[50rem]"
+        className="mt-[20rem] mx-[5rem] relative sm:mt-[20rem] sm:relative sm:right-[50rem]"
         variants={{
           hidden: { opacity: 0, x: -100 },
           visible: { opacity: 1, x: 0 },

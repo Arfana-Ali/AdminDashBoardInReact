@@ -44,6 +44,11 @@ export default function BarChartComponent(props: BarChartComponentProps) {
                   }
                 />
                 <Bar
+                  dataKey="total"
+                  fill={chartConfig.total.color}
+                  radius={4}
+                />
+                <Bar
                   dataKey="pending"
                   fill={chartConfig.pending.color}
                   radius={4}

@@ -71,11 +71,15 @@ export default function Admin() {
     },
     complete: {
       label: "Completed",
-      color: "#60a5fa",
+      color: "#14b521",
     },
     cancelled: {
       label: "Cancelled",
-      color: "#D22B2B",
+      color: "#e85810",
+    },
+    total: {
+      label: "Total",
+      color: "#104ee8",
     },
   } satisfies ChartConfig;
 
@@ -84,14 +88,20 @@ export default function Admin() {
       (
         acc: Record<
           number,
-          { pending: number; complete: number; cancelled: number }
+          {
+            pending: number;
+            complete: number;
+            cancelled: number;
+            total: number;
+          }
         >,
         task
       ) => {
         const month = new Date(task.createdAt).getMonth() + 1;
         if (!acc[month]) {
-          acc[month] = { pending: 0, complete: 0, cancelled: 0 };
+          acc[month] = { pending: 0, complete: 0, cancelled: 0, total: 0 };
         }
+        acc[month].total += 1;
         if (task.taskStatus === "isPending") {
           acc[month].pending++;
         } else if (task.taskStatus === "isComplete") {

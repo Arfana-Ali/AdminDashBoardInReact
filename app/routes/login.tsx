@@ -24,9 +24,9 @@ import { motion } from "motion/react";
 export default function login() {
   return (
     <div className="w-full h-screen overflow-hidden flex bg-gray-900">
-      <div className="bg-white w-[2400px] h-[1190px] mt-[-20px] relative left-[-10rem]"></div>
+      <div className="hidden sm:inline-block sm:bg-white sm:w-[2400px] sm:h-[1190px] sm:mt-[-20px] sm:relative sm:left-[-10rem]"></div>
       <motion.div
-        className="flex flex-col"
+        className="hidden sm:flex sm:flex-col"
         variants={{
           hidden: { opacity: 0, x: 100 },
           visible: { opacity: 1, x: 0 },
@@ -46,7 +46,7 @@ export default function login() {
         </p>
       </motion.div>
       <motion.div
-        className="mt-[20rem] relative left-[-15rem]"
+        className="mt-[20rem] ml-[5rem]  sm:mt-[20rem] sm:relative sm:left-[-15rem]"
         variants={{
           hidden: { opacity: 0, x: -200 },
           visible: { opacity: 1, x: 0 },
@@ -55,19 +55,19 @@ export default function login() {
         animate="visible"
         transition={{ duration: 1, delay: 0.5 }}
       >
-        <Card className="w-[350px] bg-transparent text-white">
+        <Card className="w-[400px] h-[500px] bg-transparent text-white sm:w-[350px] sm:h-[320px] sm:bg-transparent sm:text-white">
           <CardHeader>
-            <CardTitle className="mx-auto text-center">Login</CardTitle>
+            <CardTitle className="mx-auto text-center text-5xl sm:text-xl">Login</CardTitle>
           </CardHeader>
           <CardContent>
             <Form method="post">
-              <div className="grid w-full items-center gap-4">
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="username">Username</Label>
-                  <Input id="username" placeholder="Username" name="username" />
+              <div className="flex flex-col gap-[4rem] sm:grid sm:w-full sm:items-center sm:gap-4">
+                <div className="flex flex-col text-center sm:space-y-1.5 sm:text-start">
+                  <Label htmlFor="username" className="font-bold text-2xl mt-[2rem] sm:font-medium sm:text-sm sm:mt-0">Username</Label>
+                  <Input id="username" placeholder="Username" name="username"  />
                 </div>
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="password">Password</Label>
+                <div className="flex flex-col text-center sm:space-y-1.5 sm:text-start">
+                  <Label htmlFor="password" className="font-bold text-2xl sm:font-medium sm:text-sm">Password</Label>
                   <Input id="password" type="password" name="password" />
                 </div>
                 <Button
