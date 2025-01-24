@@ -1,10 +1,8 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import prisma from "~/utils/db";
 import { requireUser } from "~/utils/gaurds.server";
-
 import { motion } from "motion/react";
-
-import { redirect, useLoaderData, Form as F, Link } from "@remix-run/react";
+import { redirect, useLoaderData,Link } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import {
   Table,
@@ -22,7 +20,6 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-
 import {
   Dialog,
   DialogTitle,
@@ -390,7 +387,7 @@ export default function CompletedTasks() {
                                       Attachments
                                     </Label>
                                     <Link
-                                      to={item.uploadedImage}
+                                      to={item.uploadedImage || "#"}
                                       id="uploadedImage"
                                       className="col-span-3 text-center w-[200px] m-2 p-2 underline text-blue-500"
                                     >

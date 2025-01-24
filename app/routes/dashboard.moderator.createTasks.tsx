@@ -53,11 +53,14 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
   const selectCities = ["bhopal", "indore", "jabalpur", "gwalior", "sagaur"];
 
-  const citiesWithUsersOption = usersOptions.reduce((acc: any, user) => {
-    if (!acc[user.city]) acc[user.city] = [];
-    acc[user.city].push(user);
-    return acc;
-  }, {});
+  const citiesWithUsersOption = usersOptions.reduce(
+    (acc: Record<string, typeof usersOptions>, user) => {
+      if (!acc[user.city]) acc[user.city] = [];
+      acc[user.city].push(user);
+      return acc;
+    },
+    {}
+  );
 
   return { loggedinUser, citiesWithUsersOption, selectCities };
 };
@@ -254,14 +257,20 @@ export default function ModeratorPage() {
                                 <SelectValue placeholder="Select employee" />
                               </SelectTrigger>
                               <SelectContent>
-                                {availableEmployees.map((employee: any) => (
-                                  <SelectItem
-                                    key={employee.id}
-                                    value={employee.id}
-                                  >
-                                    {employee.firstName} {employee.lastName}
-                                  </SelectItem>
-                                ))}
+                                {availableEmployees.map(
+                                  (employee: {
+                                    id: string;
+                                    firstName: string;
+                                    lastName: string;
+                                  }) => (
+                                    <SelectItem
+                                      key={employee.id}
+                                      value={employee.id}
+                                    >
+                                      {employee.firstName} {employee.lastName}
+                                    </SelectItem>
+                                  )
+                                )}
                               </SelectContent>
                             </Select>
                           </div>

@@ -623,6 +623,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const fileData = await file.arrayBuffer();
 
   const buffer = new Uint8Array(fileData);
+
   const fileResponseFromCloudinary = await new Promise((resolve, reject) => {
     cloudinary.uploader
       .upload_stream({}, function (error, result) {
@@ -634,7 +635,8 @@ export async function action({ request }: ActionFunctionArgs) {
       .end(buffer);
   });
 
-  const fileSecureUrl = fileResponseFromCloudinary.secure_url as string;
+  const fileResponse = fileResponseFromCloudinary as { secure_url: string };
+  const fileSecureUrl = fileResponse.secure_url;
 
   if (_action === "completeTask") {
     // get the upload function from cloudinary which will return a url
