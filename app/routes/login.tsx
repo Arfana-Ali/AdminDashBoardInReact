@@ -46,7 +46,7 @@ export default function login() {
           </p>
         </motion.div>
       </div>
-      <div className="w-full h-1/2 md:w-[50%] md:h-full flex items-center justify-center bg-grey-900">
+      <div className="w-full h-1/2 md:w-[50%] md:h-full flex items-center justify-center bg-grey-900 ">
         <motion.div
           className="w-full max-w-md px-4"
           variants={{
