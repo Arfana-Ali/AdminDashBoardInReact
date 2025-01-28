@@ -32,7 +32,7 @@ import { motion } from "motion/react";
 
 export default function signup() {
   return (
-    <div className="w-full h-screen flex justify-center items-center md:flex  md:flex-row bg-gray-900 ">
+    <div className="w-full h-screen flex  justify-center items-center md:flex  md:flex-row bg-gray-900 ">
       <div className="bg-white hidden md:flex md:w-[50%]  md:h-full  justify-center items-center relative">
         <motion.div
           className="w-full max-w-sm px-4 md:max-w-md lg:max-w-lg"
@@ -115,7 +115,7 @@ export default function signup() {
                           <SelectItem value="jabalpur">Jabalpur</SelectItem>
                           <SelectItem value="bhopal">Bhopal</SelectItem>
                           <SelectItem value="gwalior">Gwalior</SelectItem>
-                          <SelectItem value="sagar">Sagaur</SelectItem>
+                          <SelectItem value="sagar">Sagar</SelectItem>
                           <SelectItem value="indore">Indore</SelectItem>
                         </SelectGroup>
                       </SelectContent>
