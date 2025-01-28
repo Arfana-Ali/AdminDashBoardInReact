@@ -144,7 +144,7 @@ export default function ModeratorPage() {
 
   if (loggedinUser.role === "MODERATOR") {
     return (
-      <main className="flex items-center justify-center mt-[15rem] mx-auto">
+      <main className="flex items-center justify-center lg:my-10 mx-auto">
         <motion.div
           variants={{
             hidden: { opacity: 0, x: -200 },
@@ -154,7 +154,7 @@ export default function ModeratorPage() {
           animate="visible"
           transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }}
         >
-          <Card className="w-[500px] mx-auto bg-gray-900 text-white">
+          <Card className=" mx-auto bg-gray-900 text-white">
             <CardHeader>
               <CardTitle className="text-center text-4xl font-bold">
                 Vehicle Registration Form
@@ -164,7 +164,7 @@ export default function ModeratorPage() {
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4"
+                  className="space-y-2 xl:space-y-4 md:space-y-2"
                 >
                   <FormField
                     name="vehicleNumber"

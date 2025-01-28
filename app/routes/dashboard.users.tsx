@@ -237,11 +237,11 @@ export default function UsersPage() {
         </motion.div>
       </div>
       <div className="rounded-l-[50px] h-screen w-full overflow-hidden bg-[#F8F8FF] relative right-[-2rem]">
-        <div className="relative mt-[2rem] ">
+        <div className="relative mt-[1rem] ">
           <div className="flex flex-col ml-8">
             <div className="grid grid-cols-4 gap-4 w-[95%] 2xl:mb-2">
               <motion.div
-                className="grid h-32  ml-3  2xl:py-2"
+                className="grid  xl:h-32 xl:ml-3  2xl:py-2"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -264,7 +264,7 @@ export default function UsersPage() {
                 </Card>
               </motion.div>
               <motion.div
-                className="grid h-32 2xl:py-2"
+                className="grid xl:h-32 xl:ml-3  2xl:py-2"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -287,7 +287,7 @@ export default function UsersPage() {
                 </Card>
               </motion.div>
               <motion.div
-                className="grid h-32  ml-3  2xl:py-2"
+                className="grid xl:h-32 xl:ml-3  2xl:py-2"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -310,7 +310,7 @@ export default function UsersPage() {
                 </Card>
               </motion.div>
               <motion.div
-                className="grid h-32  ml-3  2xl:py-2"
+                className="grid xl:h-32 xl:ml-3  2xl:py-2"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -333,10 +333,10 @@ export default function UsersPage() {
                 </Card>
               </motion.div>
             </div>
-            <div className="w-[95%] h-0 border border-black mt-2 2xl:mt-6"></div>
+            <div className="w-[95%] xl:h-0 border border-black xl:mt-2 2xl:mt-6"></div>
             <div className="flex flex-col  2xl:mt-2">
               <motion.div
-                className="flex mt-2 justify-between w-[95%]"
+                className="flex xl:mt-2 justify-between w-[95%]"
                 variants={{
                   hidden: { opacity: 0, x: -100 },
                   visible: { opacity: 1, x: 0 },
@@ -346,7 +346,7 @@ export default function UsersPage() {
                 transition={{ duration: 1, delay: 0.8 }}
               >
                 <Button
-                  className="relative ml-4 2xl:text-lg"
+                  className="relative xl:ml-4 2xl:text-lg"
                   onClick={() => handleDownloadTasks()}
                 >
                   Download
@@ -383,7 +383,7 @@ export default function UsersPage() {
                 </div>
               </motion.div>
               <motion.div
-                className="mt-2 xl:mt-2 2xl:mt-4 mr-1"
+                className="mt-2 xl:mt-2 2xl:mt-4 xl:mr-1"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -393,18 +393,20 @@ export default function UsersPage() {
                 transition={{ duration: 1, delay: 1.0 }}
               >
                 <Card className="w-[95%] text-white bg-gray-900 shadow-lg shadow-gray-400 rounded-xl">
-                  <CardHeader className="text-center items-center p-2 ">
-                    <CardTitle className="text-center text-2xl ">
+                  <CardHeader className="text-center items-center xl:p-2 ">
+                    <CardTitle className="text-center xl:text-3xl ">
                       Tasks
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="xl:p-2">
                     {/* Table Of All Pending Tasks */}
                     <Table>
-                      <TableCaption>A list of your pending tasks.</TableCaption>
+                      <TableCaption className="xl:mt-0 xl:px-0">
+                        A list of your pending tasks.
+                      </TableCaption>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="text-center h-6">
+                          <TableHead className="text-center xl:h-6">
                             Vehicle Number
                           </TableHead>
                           <TableHead className="text-center">
@@ -419,18 +421,18 @@ export default function UsersPage() {
                       <TableBody>
                         {userTasksForPagination.map((item) => (
                           <TableRow key={item.id}>
-                            <TableCell className="text-center">
+                            <TableCell className="text-center xl:py-0">
                               {item.vehicleNumber.toUpperCase()}
                             </TableCell>
-                            <TableCell className="text-center">
+                            <TableCell className="text-center xl:py-0">
                               {item.ownerName}
                             </TableCell>
-                            <TableCell className="text-center">
+                            <TableCell className="text-center xl:py-0">
                               {item.ownerPhone}
                             </TableCell>
-                            <TableCell className="text-center">
+                            <TableCell className="text-center xl:py-0">
                               <Popover>
-                                <PopoverTrigger className="rounded-xl bg-black w-auto h-auto m-2 p-2 text-white">
+                                <PopoverTrigger className="rounded-xl bg-black w-auto h-auto xl:m-2 xl:p-2 text-white">
                                   Action
                                 </PopoverTrigger>
                                 <PopoverContent className="bg-gray-900 w-auto h-auto">
