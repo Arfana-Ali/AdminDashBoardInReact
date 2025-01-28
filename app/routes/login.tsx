@@ -23,13 +23,8 @@ import { motion } from "motion/react";
 
 export default function login() {
   return (
-
     <div className="w-full h-screen flex justify-center items-center md:flex  md:flex-row bg-gray-900">
       <div className="bg-white hidden md:flex md:w-[50%]  md:h-full  justify-center items-center relative">
-
-    <div className=" overflow-hidden w-full h-screen flex flex-col md:flex-row bg-gray-900">
-      <div className="bg-white w-full h-1/2 md:h-full flex justify-center items-center relative">
-
         <motion.div
           className="w-full max-w-sm px-4 md:max-w-md lg:max-w-lg"
           variants={{
@@ -40,7 +35,6 @@ export default function login() {
           animate="visible"
           transition={{ duration: 1, delay: 0.5 }}
         >
-
           <p className="text-orange-500 text-center font-bold text-4xl md:text-6xl lg:text-7xl mb-4">
             Login
           </p>
@@ -48,31 +42,15 @@ export default function login() {
             To
           </p>
           <p className="text-gray-900 text-center font-bold text-4xl md:text-5xl lg:text-7xl mb-4">
-
-          <p className="text-orange-500 text-center font-bold text-4xl md:text-7xl mb-4">
-            Login
-          </p>
-          <p className="text-orange-500 text-center font-bold text-4xl md:text-7xl mb-4">
-            To
-          </p>
-          <p className="text-gray-900 text-center font-bold text-4xl md:text-7xl mb-4">
-
             Afford Motors
           </p>
         </motion.div>
       </div>
-
       <div className="w-full h-1/2 md:w-[50%] md:h-full flex items-center justify-center bg-grey-900 ">
         <motion.div
           className="w-full max-w-md px-4"
           variants={{
             hidden: { opacity: 0, x: -200 },
-
-      <div className="w-full h-1/2 md:h-full flex items-center justify-center bg-grey-900">
-        <motion.div
-          className="w-full max-w-md px-4"
-          variants={{
-            hidden: { opacity: 0, x: -150 },
             visible: { opacity: 1, x: 0 },
           }}
           initial="hidden"
@@ -81,11 +59,13 @@ export default function login() {
         >
           <Card className="w-full max-w-sm md:max-w-md lg:max-w-lg bg-transparent text-white">
             <CardHeader>
-              <CardTitle className="mx-auto text-center">Login</CardTitle>
+              <CardTitle className="mx-auto           text-center">
+                Login
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <Form method="post">
-                <div className="grid w-full items-center gap-4">
+                <div className="  grid w-full items-center gap-4">
                   <div className="flex flex-col space-y-1.5">
                     <Label htmlFor="username">Username</Label>
                     <Input
