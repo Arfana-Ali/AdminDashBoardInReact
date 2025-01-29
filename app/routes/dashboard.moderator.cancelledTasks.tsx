@@ -2,7 +2,7 @@ import { LoaderFunctionArgs } from "@remix-run/node";
 import prisma from "~/utils/db";
 import { requireUser } from "~/utils/gaurds.server";
 import { motion } from "motion/react";
-import { redirect, useLoaderData,Link } from "@remix-run/react";
+import { redirect, useLoaderData, Link } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import {
   Table,
@@ -15,7 +15,6 @@ import {
 } from "~/components/ui/table";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -131,9 +130,9 @@ export default function CompletedTasks() {
 
   if (loggedinUser && loggedinUser.role === "MODERATOR") {
     return (
-      <div className="relative mt-[10rem] ">
-        <div className="flex flex-col ml-8">
-          <div className="grid grid-cols-4">
+      <div className="flex-1 space-y-5 p-3grid gap-6 md:grid-cols-4">
+        <div className="flex flex-col mx-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 ">
             <motion.div
               className="grid"
               variants={{
@@ -144,7 +143,7 @@ export default function CompletedTasks() {
               animate="visible"
               transition={{ duration: 1, delay: 0.5 }}
             >
-              <Card className="w-[300px] bg-gradient-to-r from-[#26218c] to-[#6f64e2]">
+              <Card className="w-full bg-gradient-to-r from-[#26218c] to-[#6f64e2] shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-center text-white">
                     Total Tasks
@@ -167,21 +166,21 @@ export default function CompletedTasks() {
               animate="visible"
               transition={{ duration: 1, delay: 0.8 }}
             >
-              <Card className="w-[300px] bg-gradient-to-r from-[#d7871d] to-[#e4f10c]">
+              <Card className="w-full bg-gradient-to-r from-[#d7871d] to-[#e4f10c] shadow-lg">
                 <CardHeader>
-                  <CardTitle className="text-center text-black">
+                  <CardTitle className="text-center text-white">
                     Pending Tasks
                   </CardTitle>
                 </CardHeader>
                 <CardDescription>
-                  <p className="text-center mb-4 text-4xl text-black">
+                  <p className="text-center mb-4 text-4xl text-white">
                     {pendingTasksCount}
                   </p>
                 </CardDescription>
               </Card>
             </motion.div>
             <motion.div
-              className="grid mr-[4rem]"
+              className="grid"
               variants={{
                 hidden: { opacity: 0, y: -100 },
                 visible: { opacity: 1, y: 0 },
@@ -190,7 +189,7 @@ export default function CompletedTasks() {
               animate="visible"
               transition={{ duration: 1, delay: 1.0 }}
             >
-              <Card className="w-[300px] bg-gradient-to-r from-[#82da50] to-[#11a62d]">
+              <Card className="w-full bg-gradient-to-r from-[#82da50] to-[#11a62d] shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-center text-white">
                     Completed Tasks
@@ -213,7 +212,7 @@ export default function CompletedTasks() {
               animate="visible"
               transition={{ duration: 1, delay: 1.0 }}
             >
-              <Card className="w-[300px] bg-gradient-to-r from-[#e86e6a] to-[#a62511]">
+              <Card className="w-full bg-gradient-to-r from-[#e86e6a] to-[#a62511] shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-center text-white">
                     Cancelled Tasks
@@ -227,8 +226,8 @@ export default function CompletedTasks() {
               </Card>
             </motion.div>
           </div>
-          <div className="w-[90%] h-0 border border-black mt-4 ml-4"></div>
-          <div className="flex flex-col ml-8">
+          <div className="w-[100%] h-0 border border-black mt-4"></div>
+          <div className="flex flex-col ">
             <motion.div
               className="flex mt-4 justify-evenly"
               variants={{
@@ -245,7 +244,7 @@ export default function CompletedTasks() {
               >
                 Download
               </Button>
-              <div className="relative right-[-5rem]">
+              <div className="relative right-[-10rem]">
                 <Pagination>
                   <PaginationContent>
                     <PaginationItem>
@@ -286,127 +285,133 @@ export default function CompletedTasks() {
               animate="visible"
               transition={{ duration: 1, delay: 1.0 }}
             >
-              <Card className="w-[60rem] text-white bg-gray-900 shadow-lg shadow-gray-400 rounded-xl">
-                <CardHeader className="text-center items-center ">
-                  <CardTitle className="text-center text-4xl ">Tasks</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {/* Table Of All Cancelled Tasks */}
-                  <Table>
-                    <TableCaption>A list of your pending tasks.</TableCaption>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="text-center">
-                          Vehicle Number
-                        </TableHead>
-                        <TableHead className="text-center">
-                          Owner Name
-                        </TableHead>
-                        <TableHead className="text-center">
-                          Owner Phone Number
-                        </TableHead>
-                        <TableHead className="text-center">Action</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {userTasksForPagination.map((item) => (
-                        <TableRow key={item.id}>
-                          <TableCell className="text-center">
-                            {item.vehicleNumber.toUpperCase()}
-                          </TableCell>
-                          <TableCell className="text-center">
-                            {item.ownerName}
-                          </TableCell>
-                          <TableCell className="text-center">
-                            {item.ownerPhone}
-                          </TableCell>
-                          <TableCell className="text-center">
-                            <Dialog>
-                              <DialogTrigger asChild>
-                                <Button
-                                  variant="ghost"
-                                  className="bg-black text-white"
-                                >
-                                  View
-                                </Button>
-                              </DialogTrigger>
-                              <DialogContent className="sm:max-w-[600px]">
-                                <DialogHeader>
-                                  <DialogTitle className="text-center">
-                                    Completed Task
-                                  </DialogTitle>
-                                </DialogHeader>
-                                <div className="grid gap-4 py-4">
-                                  <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label
-                                      htmlFor="vehicleNumber"
-                                      className="text-right w-fit"
-                                    >
-                                      Vehicle Number
-                                    </Label>
-                                    <Input
-                                      id="vehicleNumber"
-                                      value={item.vehicleNumber.toUpperCase()}
-                                      readOnly={true}
-                                      className="col-span-3 text-center"
-                                    />
-                                  </div>
-                                  <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label
-                                      htmlFor="ownerName"
-                                      className="text-right"
-                                    >
-                                      Owner Name
-                                    </Label>
-                                    <Input
-                                      id="ownerName"
-                                      value={item.ownerName.toUpperCase()}
-                                      readOnly={true}
-                                      className="col-span-3 text-center"
-                                    />
-                                  </div>
-                                  <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label
-                                      htmlFor="ownerPhone"
-                                      className="text-right"
-                                    >
-                                      Owner Phone Number
-                                    </Label>
-                                    <Input
-                                      id="ownerName"
-                                      value={item.ownerPhone.toUpperCase()}
-                                      readOnly={true}
-                                      className="col-span-3 text-center"
-                                    />
-                                  </div>
-                                  <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label
-                                      htmlFor="submittedImage"
-                                      className="text-right"
-                                    >
-                                      Attachments
-                                    </Label>
-                                    <Link
-                                      to={item.uploadedImage || "#"}
-                                      id="uploadedImage"
-                                      className="col-span-3 text-center w-[200px] m-2 p-2 underline text-blue-500"
-                                    >
-                                      Uploaded Image
-                                    </Link>
-                                  </div>
+              <div className="w-full overflow-x-auto rounded-xl shadow-lg bg-gray-900 p-4">
+                <h1 className="text-3xl 2xl:text-4xl text-white text-center font-bold mb-4">
+                  Tasks
+                </h1>
+                <Table className="border-collapse border border-gray-900 w-full">
+                  <TableCaption className="text-md text-gray-500">
+                    A list of all completed tasks.
+                  </TableCaption>
+                  <TableHeader className="">
+                    <TableRow>
+                      <TableHead className="text-center text-l text-gray-500 font-bold py-2 ">
+                        Vehicle Number
+                      </TableHead>
+                      <TableHead className="text-center text-l text-gray-500 font-bold py-2 ">
+                        Owner Name
+                      </TableHead>
+                      <TableHead className="text-center text-l text-gray-500 font-bold py-2 ">
+                        Owner Phone Number
+                      </TableHead>
+                      <TableHead className="text-center text-l text-gray-500 font-bold py-2 ">
+                        Action
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {userTasksForPagination.map((item) => (
+                      <TableRow
+                        key={item.id}
+                        className="bg-gray-900 hover:bg-gray-800 transition duration-200"
+                      >
+                        <TableCell className="border-none text-center  text-white py-2 border ">
+                          {item.vehicleNumber.toUpperCase()}
+                        </TableCell>
+                        <TableCell className="border-none text-center text-white py-2 border">
+                          {item.ownerName}
+                        </TableCell>
+                        <TableCell className="border-none text-center text-white  py-2 border">
+                          {item.ownerPhone}
+                        </TableCell>
+                        <TableCell className="border-none text-center text-white py-2 border">
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                className="bg-gradient-to-r to-gray-800 text-white hover:from-gray-600 hover:to-gray-700 px-4 py-2 rounded-lg"
+                              >
+                                View
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[600px] bg-gray-900 text-white rounded-2xl shadow-lg">
+                              <DialogHeader>
+                                <DialogTitle className="text-center text-2xl font-semibold">
+                                  Completed Task
+                                </DialogTitle>
+                              </DialogHeader>
+                              <div className="grid gap-6 py-4">
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label
+                                    htmlFor="vehicleNumber"
+                                    className="text-right text-gray-300 font-medium"
+                                  >
+                                    Vehicle Number
+                                  </Label>
+                                  <Input
+                                    id="vehicleNumber"
+                                    value={item.vehicleNumber.toUpperCase()}
+                                    readOnly={true}
+                                    className="col-span-3 text-center bg-gray-800 text-gray-300 border border-gray-600 rounded-lg"
+                                  />
                                 </div>
-                                <DialogClose asChild>
-                                  <Button>Close</Button>
-                                </DialogClose>
-                              </DialogContent>
-                            </Dialog>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label
+                                    htmlFor="ownerName"
+                                    className="text-right text-gray-300 font-medium"
+                                  >
+                                    Owner Name
+                                  </Label>
+                                  <Input
+                                    id="ownerName"
+                                    value={item.ownerName.toUpperCase()}
+                                    readOnly={true}
+                                    className="col-span-3 text-center bg-gray-800 text-gray-300 border border-gray-600 rounded-lg"
+                                  />
+                                </div>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label
+                                    htmlFor="ownerPhone"
+                                    className="text-right text-gray-300 font-medium"
+                                  >
+                                    Owner Phone Number
+                                  </Label>
+                                  <Input
+                                    id="ownerPhone"
+                                    value={item.ownerPhone.toUpperCase()}
+                                    readOnly={true}
+                                    className="col-span-3 text-center bg-gray-800 text-gray-300 border border-gray-600 rounded-lg"
+                                  />
+                                </div>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label
+                                    htmlFor="uploadedImage"
+                                    className="text-right text-gray-300 font-medium"
+                                  >
+                                    Attachments
+                                  </Label>
+                                  <Link
+                                    to={item.uploadedImage || "#"}
+                                    id="uploadedImage"
+                                    className="col-span-3 text-center underline text-blue-400 hover:text-blue-600"
+                                  >
+                                    Uploaded Image
+                                  </Link>
+                                </div>
+                              </div>
+                              <DialogClose asChild>
+                                <Button className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+                                  Close
+                                </Button>
+                              </DialogClose>
+                            </DialogContent>
+                          </Dialog>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
             </motion.div>
           </div>
         </div>
