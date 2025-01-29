@@ -203,14 +203,14 @@ export default function CompletedTasks() {
               </Card>
             </motion.div>
             <motion.div
-              className="grid mr-[4rem]"
+              className="grid"
               variants={{
                 hidden: { opacity: 0, y: -100 },
                 visible: { opacity: 1, y: 0 },
               }}
               initial="hidden"
               animate="visible"
-              transition={{ duration: 1, delay: 1.0 }}
+              transition={{ duration: 1, delay: 1.2 }}
             >
               <Card className="w-full bg-gradient-to-r from-[#e86e6a] to-[#a62511] shadow-lg">
                 <CardHeader>
