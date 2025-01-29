@@ -110,25 +110,24 @@ export default function ModeratorPage() {
             </motion.ul>
           </nav>
           <motion.div
-  className="relative flex items-center justify-center h-screen"
-  variants={{
-    hidden: { opacity: 0, x: -200 },
-    visible: { opacity: 1, x: 0 },
-  }}
-  initial="hidden"
-  animate="visible"
-  transition={{ duration: 0.8, delay: 1.5 }}
->
-  <F method="post" action="/logout">
-    <Button
-      className="bg-orange-500 text-white hover:bg-orange-600 px-6 py-3"
-      type="submit"
-    >
-      Logout
-    </Button>
-  </F>
-</motion.div>
-
+            className="relative flex items-center justify-center h-screen"
+            variants={{
+              hidden: { opacity: 0, x: -200 },
+              visible: { opacity: 1, x: 0 },
+            }}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.8, delay: 1.5 }}
+          >
+            <F method="post" action="/logout">
+              <Button
+                className="bg-orange-500 text-white hover:bg-orange-600 px-6 py-3"
+                type="submit"
+              >
+                Logout
+              </Button>
+            </F>
+          </motion.div>
         </div>
         <div className="hidden sm:block rounded-l-[35px] md:rounded-l-[35px] lg:rounded-l-[50px] h-screen w-[calc(100%)] md:w-[calc(100%)] lg:w-[calc(100%)] xl:w-[calc(100%)] overflow-hidden bg-[#F8F8FF]  ">
           <Outlet />
