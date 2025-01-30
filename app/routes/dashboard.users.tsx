@@ -49,7 +49,6 @@ import {
 import { Button } from "~/components/ui/button";
 
 // Animation imports
-
 import { motion } from "motion/react";
 import prisma from "~/utils/db";
 import { Label } from "~/components/ui/label";
@@ -74,8 +73,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userTasksForPagination = await prisma.tasks.findMany({
     where: { authorId: user.id, taskStatus: "isPending" },
     orderBy: { createdAt: "desc" },
-    skip: (parseInt(page) - 1) * parseInt(perPage),
-    take: parseInt(perPage),
+    skip: (Number.parseInt(page) - 1) * Number.parseInt(perPage),
+    take: Number.parseInt(perPage),
   });
 
   const userTotalTasks = await prisma.tasks.findMany({
@@ -156,7 +155,7 @@ export default function UsersPage() {
     (task) => task.taskStatus === "isCancelled"
   ).length;
 
-  const totalPages = Math.ceil(total / parseInt(perPage)); // Calculate total pages
+  const totalPages = Math.ceil(total / Number.parseInt(perPage)); // Calculate total pages
 
   const handleDownloadTasks = () => {
     const wb = XLSX.utils.book_new();
@@ -166,13 +165,13 @@ export default function UsersPage() {
     XLSX.writeFile(wb, "UserPendingTasksData.xlsx");
   };
 
-  // Display toast if exists
-
   return (
-    <div className="flex bg-gray-900 h-screen w-full overflow-hidden absolute">
-      <div className="flex flex-col gap-4 w-[15rem] md:w-[16rem] lg:w-[20rem] xl:w-[22rem]">
+    <div className="flex bg-gray-900 h-screen w-full overflow-hidden max-sm:flex-col max-sm:h-auto">
+      {/* Sidebar */}
+      <div className="flex flex-col gap-4 w-[15rem] md:w-[16rem] lg:w-[20rem] xl:w-[22rem] overflow-hidden max-sm:w-full max-sm:h-44 max-sm:grid max-sm:grid-cols-3 max-sm:grid-rows-2">
+        {/* Logo and title */}
         <motion.div
-          className="flex gap-3 md:gap-4 w-full items-center mt-1 ml-4 "
+          className="flex max-sm:gap-2 sm:gap-2 md:gap-1 lg:gap-3 w-full justify-center items-center mt-8 max-sm:col-span-2 max-sm:m-4 max-sm:justify-start"
           variants={{
             hidden: { opacity: 0, x: -200 },
             visible: { opacity: 1, x: 0 },
@@ -184,15 +183,17 @@ export default function UsersPage() {
           <img
             alt="logo"
             src="https://affordmotors.com/loan-recovery/assets/admin/dist/img/logo-new.png"
-            className="w-[33px] h-[33px] ml-1 mt-5  xl:w-[36px] xl:h-[36px] 2xl:w-[40px] 2xl:h-[40px]"
+            className="max-sm:w-[36px] max-sm:h-[36px] sm:w-[28px] sm:h-[28px] md:w-[33px] md:h-[33px] xl:w-[40px] xl:h-[40px]"
           />
-          <h1 className=" sm:text-2xl md:text-2xl text-orange-600 font-bold tracking-tighter mt-5 lg:text-5xl xl:text-4xl 2xl:text-4xl  2xl:mt-10">
+          <h1 className="text-orange-600 font-bold tracking-tighter max-sm:text-2xl sm:text-xl md:text-2xl xl:text-4xl">
             Afford Motors
           </h1>
         </motion.div>
-        <div className="h-[300px] flex flex-col gap-4  justify-center items-center">
+
+        {/* User welcome section */}
+        <div className="h-[300px] flex flex-col gap-4 justify-center items-center max-sm:col-span-3 max-sm:row-start-2 max-sm:h-auto">
           <motion.h1
-            className="text-white font-bold tracking-tight text-xl lg:text-2xl xl:text-3xl 2xl:text-3xl ml-4"
+            className="text-white font-bold tracking-tight sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-3xl max-sm:text-xl"
             variants={{
               hidden: { opacity: 0, x: -200 },
               visible: { opacity: 1, x: 0 },
@@ -204,7 +205,7 @@ export default function UsersPage() {
             Welcome {user.firstName}
           </motion.h1>
           <motion.h3
-            className="text-white font-bold tracking-wide relative ml-5 xl:text-lg 2xl:text-lg"
+            className="text-white font-bold tracking-wide sm:text-xs md:text-sm xl:text-lg 2xl:text-lg"
             variants={{
               hidden: { opacity: 0, x: -200 },
               visible: { opacity: 1, x: 0 },
@@ -216,8 +217,10 @@ export default function UsersPage() {
             Working City : {user.city.toUpperCase()}
           </motion.h3>
         </div>
+
+        {/* Logout button */}
         <motion.div
-          className="relative h-screen"
+          className="h-screen flex justify-center items-end mb-12 max-sm:col-span-1 max-sm:h-auto max-sm:m-0 max-sm:justify-center max-sm:self-center max-sm:p-2"
           variants={{
             hidden: { opacity: 0, x: -200 },
             visible: { opacity: 1, x: 0 },
@@ -228,7 +231,7 @@ export default function UsersPage() {
         >
           <Form method="post" action="/logout">
             <Button
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-16   bg-orange-500 text-white xl:text-lg 2xl:text-xl"
+              className="bg-orange-500 text-white xl:text-lg 2xl:text-xl max-sm:text-xs max-sm:h-6"
               type="submit"
             >
               Logout
@@ -236,12 +239,16 @@ export default function UsersPage() {
           </Form>
         </motion.div>
       </div>
-      <div className="rounded-l-[50px] h-screen w-full overflow-hidden bg-[#F8F8FF] relative right-[-2rem]">
-        <div className="relative mt-[1rem] ">
-          <div className="flex flex-col ml-8">
-            <div className="grid grid-cols-4 gap-4 w-[95%] 2xl:mb-2">
+
+      {/* Main content */}
+      <div className="rounded-l-[50px] w-full overflow-hidden bg-[#F8F8FF] max-sm:rounded-none max-sm:rounded-t-[50px]">
+        <div className="mt-[1rem]">
+          <div className="flex flex-col ml-8 max-sm:m-3 max-sm:flex max-sm:justify-center max-sm:items-center">
+            {/* Task summary cards */}
+            <div className="grid grid-cols-4 sm:gap-1 md:gap-4 w-[95%] mb-2 max-sm:grid max-sm:grid-cols-2 max-sm:grid-rows-2">
+              {/* Total Tasks Card */}
               <motion.div
-                className="grid  xl:h-32 xl:ml-3  2xl:py-2"
+                className="grid h-32 sm:px-0 py-2 max-sm:p-1"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -250,21 +257,23 @@ export default function UsersPage() {
                 animate="visible"
                 transition={{ duration: 1, delay: 0.5 }}
               >
-                <Card className="bg-gradient-to-r from-[#26218c] to-[#6f64e2]">
-                  <CardHeader>
+                <Card className="bg-gradient-to-r from-[#26218c] to-[#6f64e2] max-sm:min-w-0">
+                  <CardHeader className="sm:p-4 md:p-4 lg:p-4">
                     <CardTitle className="text-center text-white 2xl:text-2xl">
                       Total Tasks
                     </CardTitle>
                   </CardHeader>
                   <CardDescription>
-                    <p className="text-center mb-4 text-4xl text-orange-400">
+                    <p className="text-center mb-4 md:text-2xl lg:text-4xl text-orange-400">
                       {totalTaskCount}
                     </p>
                   </CardDescription>
                 </Card>
               </motion.div>
+
+              {/* Pending Tasks Card */}
               <motion.div
-                className="grid xl:h-32 xl:ml-3  2xl:py-2"
+                className="grid h-32 sm:px-0 py-2 max-sm:p-1"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -273,21 +282,23 @@ export default function UsersPage() {
                 animate="visible"
                 transition={{ duration: 1, delay: 0.8 }}
               >
-                <Card className="bg-gradient-to-r from-[#d7871d] to-[#e4f10c]">
-                  <CardHeader>
+                <Card className="bg-gradient-to-r from-[#d7871d] to-[#e4f10c] max-sm:min-w-0">
+                  <CardHeader className="sm:p-3 md:p-3 lg:p-4">
                     <CardTitle className="text-center text-white 2xl:text-2xl">
                       Pending Tasks
                     </CardTitle>
                   </CardHeader>
                   <CardDescription>
-                    <p className="text-center mb-4 text-4xl text-white">
+                    <p className="text-center mb-4 md:text-2xl lg:text-4xl text-white">
                       {pendingTasksCount}
                     </p>
                   </CardDescription>
                 </Card>
               </motion.div>
+
+              {/* Completed Tasks Card */}
               <motion.div
-                className="grid xl:h-32 xl:ml-3  2xl:py-2"
+                className="grid h-32 sm:px-0 py-2 max-sm:p-1"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -296,21 +307,23 @@ export default function UsersPage() {
                 animate="visible"
                 transition={{ duration: 1, delay: 1.0 }}
               >
-                <Card className="bg-gradient-to-r from-[#82da50] to-[#11a62d]">
-                  <CardHeader>
+                <Card className="bg-gradient-to-r from-[#82da50] to-[#11a62d] max-sm:min-w-0">
+                  <CardHeader className="sm:p-3 md:p-3 lg:p-4">
                     <CardTitle className="text-center text-white 2xl:text-2xl">
                       Completed Tasks
                     </CardTitle>
                   </CardHeader>
                   <CardDescription>
-                    <p className="text-center mb-4 text-4xl text-white">
+                    <p className="text-center mb-4 md:text-2xl lg:text-4xl text-white">
                       {completedTasksCount}
                     </p>
                   </CardDescription>
                 </Card>
               </motion.div>
+
+              {/* Cancelled Tasks Card */}
               <motion.div
-                className="grid xl:h-32 xl:ml-3  2xl:py-2"
+                className="grid h-32 sm:px-1 py-2 max-sm:p-1"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -319,24 +332,27 @@ export default function UsersPage() {
                 animate="visible"
                 transition={{ duration: 1, delay: 1.0 }}
               >
-                <Card className=" bg-gradient-to-r from-[#e86e6a] to-[#a62511]">
-                  <CardHeader>
+                <Card className="bg-gradient-to-r from-[#e86e6a] to-[#a62511] max-sm:min-w-0">
+                  <CardHeader className="sm:p-3 md:p-3 lg:p-4">
                     <CardTitle className="text-center text-white 2xl:text-2xl">
                       Cancelled Tasks
                     </CardTitle>
                   </CardHeader>
                   <CardDescription>
-                    <p className="text-center mb-4 text-4xl text-white">
+                    <p className="text-center mb-4 md:text-2xl lg:text-4xl text-white">
                       {cancelledTasksCount}
                     </p>
                   </CardDescription>
                 </Card>
               </motion.div>
             </div>
-            <div className="w-[95%] xl:h-0 border border-black xl:mt-2 2xl:mt-6"></div>
-            <div className="flex flex-col  2xl:mt-2">
+
+            <div className="w-[95%] xl:h-0 border border-black md:mt-0 xl:mt-0 2xl:mt-6"></div>
+
+            <div className="flex flex-col w-full sm:mt-2 md:mt-3 xl:mt-0 2xl:mt-2">
+              {/* Download and Pagination */}
               <motion.div
-                className="flex xl:mt-2 justify-between w-[95%]"
+                className="flex xl:mt-2 justify-between w-[95%] max-sm:m-2"
                 variants={{
                   hidden: { opacity: 0, x: -100 },
                   visible: { opacity: 1, x: 0 },
@@ -346,17 +362,21 @@ export default function UsersPage() {
                 transition={{ duration: 1, delay: 0.8 }}
               >
                 <Button
-                  className="relative xl:ml-4 2xl:text-lg"
+                  className="xl:ml-4 2xl:text-lg max-sm:h-6 max-sm:px-1 max-sm:text-sm max-sm:mt-2 max-sm:mx-2"
                   onClick={() => handleDownloadTasks()}
                 >
                   Download
                 </Button>
-                <div className="relative 2xl:text-lg">
-                  <Pagination>
-                    <PaginationContent>
+                <div className="2xl:text-lg">
+                  <Pagination className="max-sm:mx-0">
+                    <PaginationContent className="max-sm:gap-0">
                       <PaginationItem>
                         <PaginationPrevious
-                          href={`?page=${Math.max(1, parseInt(page) - 1)}`}
+                          href={`?page=${Math.max(
+                            1,
+                            Number.parseInt(page) - 1
+                          )}`}
+                          className="max-sm:px-0"
                         />
                       </PaginationItem>
                       {/* Loop through total pages to create pagination links */}
@@ -364,7 +384,8 @@ export default function UsersPage() {
                         <PaginationItem key={index + 1}>
                           <PaginationLink
                             href={`?page=${index + 1}`}
-                            isActive={index + 1 === parseInt(page)}
+                            isActive={index + 1 === Number.parseInt(page)}
+                            className="max-sm:w-4 max-sm:pl-1"
                           >
                             {index + 1}
                           </PaginationLink>
@@ -374,16 +395,19 @@ export default function UsersPage() {
                         <PaginationNext
                           href={`?page=${Math.min(
                             totalPages,
-                            parseInt(page) + 1
+                            Number.parseInt(page) + 1
                           )}`}
+                          className="max-sm:p-1.5"
                         />
                       </PaginationItem>
                     </PaginationContent>
                   </Pagination>
                 </div>
               </motion.div>
+
+              {/* Tasks Table */}
               <motion.div
-                className="mt-2 xl:mt-2 2xl:mt-4 xl:mr-1"
+                className="sm:mt-2 md:mt-2 xl:mt-2 2xl:mt-4 xl:mr-1"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -392,36 +416,38 @@ export default function UsersPage() {
                 animate="visible"
                 transition={{ duration: 1, delay: 1.0 }}
               >
-                <Card className="w-[95%] text-white bg-gray-900 shadow-lg shadow-gray-400 rounded-xl">
-                  <CardHeader className="text-center items-center xl:p-2 ">
-                    <CardTitle className="text-center xl:text-3xl ">
+                <Card className="w-[95%] max-sm:w-auto text-white bg-gray-900 shadow-lg shadow-gray-400 rounded-xl">
+                  <CardHeader className="text-center items-center max-sm:p-3 sm:p-2 md:p-2 xl:p-2">
+                    <CardTitle className="sm:text-2xl md:text-2xl xl:text-3xl max-sm:text-xl">
                       Tasks
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="xl:p-2">
+                  <CardContent className="max-sm:p-2 md:p-1 xl:p-2">
                     {/* Table Of All Pending Tasks */}
-                    <Table>
-                      <TableCaption className="xl:mt-0 xl:px-0">
+                    <Table className="max-sm:text-xs">
+                      <TableCaption className="sm:mt-0 md:mt-0 xl:mt-0 xl:px-0">
                         A list of your pending tasks.
                       </TableCaption>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="text-center xl:h-6">
+                          <TableHead className="text-center max-sm:px-1 xl:h-6">
                             Vehicle Number
                           </TableHead>
-                          <TableHead className="text-center">
+                          <TableHead className="text-center max-sm:px-1">
                             Owner Name
                           </TableHead>
-                          <TableHead className="text-center">
+                          <TableHead className="text-center max-sm:px-1">
                             Owner Phone Number
                           </TableHead>
-                          <TableHead className="text-center">Action</TableHead>
+                          <TableHead className="text-center max-sm:px-1">
+                            Action
+                          </TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         {userTasksForPagination.map((item) => (
                           <TableRow key={item.id}>
-                            <TableCell className="text-center xl:py-0">
+                            <TableCell className="text-center sm:py-3 xl:py-0">
                               {item.vehicleNumber.toUpperCase()}
                             </TableCell>
                             <TableCell className="text-center xl:py-0">
@@ -430,17 +456,20 @@ export default function UsersPage() {
                             <TableCell className="text-center xl:py-0">
                               {item.ownerPhone}
                             </TableCell>
-                            <TableCell className="text-center xl:py-0">
+                            <TableCell className="text-center sm:p-0 xl:py-0">
                               <Popover>
-                                <PopoverTrigger className="rounded-xl bg-black w-auto h-auto xl:m-2 xl:p-2 text-white">
+                                <PopoverTrigger className="rounded-xl bg-black w-auto h-auto md:p-2 sm:p-2 xl:m-2 xl:p-2 max-sm:p-2 text-white">
                                   Action
                                 </PopoverTrigger>
-                                <PopoverContent className="bg-gray-900 w-auto h-auto">
-                                  <div className="flex gap-4">
-                                    <Button className="bg-gradient-to-b from-[#0093E9] to-[#80D0C7]">
+                                <PopoverContent className="bg-gray-900 w-auto h-auto max-sm:w-50 max-sm:p-2">
+                                  <div className="flex gap-4 max-sm:gap-2">
+                                    <Button className="bg-gradient-to-b from-[#0093E9] to-[#80D0C7] max-sm:min-w-3">
                                       <Dialog>
                                         <DialogTrigger>Complete</DialogTrigger>
-                                        <DialogContent aria-label="Complete">
+                                        <DialogContent
+                                          aria-label="Complete"
+                                          className="max-sm:w-[90%] max-sm:p-4"
+                                        >
                                           <DialogHeader>
                                             <DialogTitle className="text-center">
                                               Complete Task
@@ -451,44 +480,41 @@ export default function UsersPage() {
                                             encType="multipart/form-data"
                                           >
                                             <div className="flex flex-col gap-2 justify-between">
-                                              <div className="flex gap-4 ">
-                                                <Label className=" text-black font-bold m-2 p-2">
+                                              <div className="flex gap-4">
+                                                <Label className="text-black font-bold m-2 p-2 max-sm:w-[100%]">
                                                   Vehicle Number
                                                 </Label>
-                                                <Label className="bg-gray-600 rounded-lg text-white font-bold m-2 p-4 w-[250px] text-center">
+                                                <Label className="bg-gray-600 rounded-lg text-white font-bold m-2 p-4 w-[250px] text-center max-sm:w-[100%] max-sm:px-2">
                                                   {item.vehicleNumber.toUpperCase()}
                                                 </Label>
                                               </div>
                                               <div className="flex gap-4">
-                                                <Label className=" text-black font-bold m-2 p-2 mr-[30px]">
+                                                <Label className="text-black font-bold m-2 p-2 mr-[30px] max-sm:w-[100%]">
                                                   Owner Name
                                                 </Label>
-                                                <Label className="bg-gray-600 relative rounded-lg text-white font-bold m-2 p-4 w-[250px] text-center">
+                                                <Label className="bg-gray-600 rounded-lg text-white font-bold m-2 p-4 w-[250px] text-center max-sm:w-[100%] max-sm:px-2">
                                                   {item.ownerName.toUpperCase()}
                                                 </Label>
                                               </div>
-                                              <div className="flex flex-col gap-4">
-                                                <Label className=" text-black font-bold m-2 p-2">
+                                              <div className="flex flex-col gap-4 max-sm:gap-0">
+                                                <Label className="text-black font-bold m-2 p-2 max-sm:w-[100%] max-sm:m-0">
                                                   Upload First Image
                                                 </Label>
                                                 <Input
                                                   type="file"
                                                   name="uploadImage"
-                                                  required={true}
-                                                  className="file:mr-4 file:py-2 file:px-4
-                                                  file:rounded-full file:border-0
-                                                  file:text-sm file:font-semibold
-                                                  file:bg-violet-50 file:text-violet-700
-                                                  hover:file:bg-violet-100 h-[50px] w-[300px]"
+                                                  required
+                                                  className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 h-[50px] w-[300px] max-sm:w-[100%] max-sm:p-1"
                                                 />
                                               </div>
                                             </div>
                                             <DialogFooter>
-                                              <div className="flex justify-between w-[500px]">
+                                              <div className="flex justify-between w-[500px] max-sm:w-full">
                                                 <DialogClose asChild>
                                                   <Button
                                                     type="button"
                                                     variant="destructive"
+                                                    className="max-sm:h-7 max-sm:px-2 max-sm:text-sm max-sm:mt-2 max-sm:mx-2"
                                                   >
                                                     Close
                                                   </Button>
@@ -502,7 +528,7 @@ export default function UsersPage() {
                                                   name="_action"
                                                   type="submit"
                                                   value="completeTask"
-                                                  className="mr-16"
+                                                  className="mr-16 max-sm:h-7 max-sm:px-2 max-sm:text-sm max-sm:mt-2 max-sm:mx-2"
                                                 >
                                                   Submit
                                                 </Button>
@@ -512,12 +538,15 @@ export default function UsersPage() {
                                         </DialogContent>
                                       </Dialog>
                                     </Button>
-                                    <Button className="bg-gradient-to-b from-[#f56e6e] to-[#f02b2b]">
+                                    <Button className="bg-gradient-to-b from-[#f56e6e] to-[#f02b2b] max-sm:min-w-3">
                                       <Dialog>
                                         <DialogTrigger>Cancel</DialogTrigger>
-                                        <DialogContent aria-label="Cancel">
+                                        <DialogContent
+                                          aria-label="Cancel"
+                                          className="max-sm:w-[90%] max-sm:p-4"
+                                        >
                                           <DialogHeader>
-                                            <DialogTitle>
+                                            <DialogTitle className="text-center">
                                               Cancel Task
                                             </DialogTitle>
                                           </DialogHeader>
@@ -526,44 +555,41 @@ export default function UsersPage() {
                                             encType="multipart/form-data"
                                           >
                                             <div className="flex flex-col gap-2 justify-between">
-                                              <div className="flex gap-4 ">
-                                                <Label className=" text-black font-bold m-2 p-2">
+                                              <div className="flex gap-4">
+                                                <Label className="text-black font-bold m-2 p-2 max-sm:w-[100%]">
                                                   Vehicle Number
                                                 </Label>
-                                                <Label className="bg-gray-600 rounded-lg text-white font-bold m-2 p-4 w-[250px] text-center">
+                                                <Label className="bg-gray-600 rounded-lg text-white font-bold m-2 p-4 w-[250px] text-center max-sm:w-[100%] max-sm:px-2">
                                                   {item.vehicleNumber.toUpperCase()}
                                                 </Label>
                                               </div>
                                               <div className="flex gap-4">
-                                                <Label className=" text-black font-bold m-2 p-2 mr-[30px]">
+                                                <Label className="text-black font-bold m-2 p-2 mr-[30px] max-sm:w-[100%]">
                                                   Owner Name
                                                 </Label>
-                                                <Label className="bg-gray-600 relative rounded-lg text-white font-bold m-2 p-4 w-[250px] text-center">
+                                                <Label className="bg-gray-600 rounded-lg text-white font-bold m-2 p-4 w-[250px] text-center max-sm:w-[100%] max-sm:px-2">
                                                   {item.ownerName.toUpperCase()}
                                                 </Label>
                                               </div>
-                                              <div className="flex gap-4">
-                                                <Label className=" text-black font-bold m-2 p-2">
+                                              <div className="flex flex-col gap-4 max-sm:gap-0">
+                                                <Label className="text-black font-bold m-2 p-2 max-sm:w-[100%] max-sm:m-0">
                                                   Upload Image
                                                 </Label>
                                                 <Input
                                                   type="file"
                                                   name="uploadImage"
-                                                  required={true}
-                                                  className="file:mr-4 file:py-2 file:px-4
-                                                  file:rounded-full file:border-0
-                                                  file:text-sm file:font-semibold
-                                                  file:bg-violet-50 file:text-violet-700
-                                                  hover:file:bg-violet-100 h-[50px] w-[300px]"
+                                                  required
+                                                  className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 h-[50px] w-[300px] max-sm:w-[100%] max-sm:p-1"
                                                 />
                                               </div>
                                             </div>
                                             <DialogFooter>
-                                              <div className="flex justify-between w-[500px]">
+                                              <div className="flex justify-between w-[500px] max-sm:w-full">
                                                 <DialogClose asChild>
                                                   <Button
                                                     type="button"
                                                     variant="destructive"
+                                                    className="max-sm:h-7 max-sm:px-2 max-sm:text-sm max-sm:mt-2 max-sm:mx-2"
                                                   >
                                                     Close
                                                   </Button>
@@ -577,7 +603,7 @@ export default function UsersPage() {
                                                   name="_action"
                                                   type="submit"
                                                   value="cancelTask"
-                                                  className="mr-16"
+                                                  className="mr-16 max-sm:h-7 max-sm:px-2 max-sm:text-sm max-sm:mt-2 max-sm:mx-2"
                                                 >
                                                   Submit
                                                 </Button>
@@ -628,7 +654,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const fileResponseFromCloudinary = await new Promise((resolve, reject) => {
     cloudinary.uploader
-      .upload_stream({}, function (error, result) {
+      .upload_stream({}, (error, result) => {
         if (error) {
           reject(error);
         }
