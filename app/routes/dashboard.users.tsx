@@ -170,9 +170,9 @@ export default function UsersPage() {
 
   return (
     <div className="flex bg-gray-900 h-screen w-full overflow-hidden absolute">
-      <div className="flex flex-col gap-4 w-[400px]">
+      <div className="flex flex-col gap-4 w-[15rem] md:w-[16rem] lg:w-[20rem] xl:w-[22rem]">
         <motion.div
-          className="flex gap-4 w-full items-center mt-[3.2rem] ml-[2rem]"
+          className="flex gap-3 md:gap-4 w-full items-center mt-1 ml-4 "
           variants={{
             hidden: { opacity: 0, x: -200 },
             visible: { opacity: 1, x: 0 },
@@ -184,15 +184,15 @@ export default function UsersPage() {
           <img
             alt="logo"
             src="https://affordmotors.com/loan-recovery/assets/admin/dist/img/logo-new.png"
-            className="w-[33px] h-[33px] ml-[20px]"
+            className="w-[33px] h-[33px] ml-1 mt-5  xl:w-[36px] xl:h-[36px] 2xl:w-[40px] 2xl:h-[40px]"
           />
-          <h1 className="text-4xl text-orange-600 font-bold tracking-tighter">
+          <h1 className=" sm:text-2xl md:text-2xl text-orange-600 font-bold tracking-tighter mt-5 lg:text-5xl xl:text-4xl 2xl:text-4xl  2xl:mt-10">
             Afford Motors
           </h1>
         </motion.div>
-        <div className="mt-[5rem] ml-[6rem] flex flex-col gap-4">
+        <div className="h-[300px] flex flex-col gap-4  justify-center items-center">
           <motion.h1
-            className="text-white font-bold tracking-tight text-2xl"
+            className="text-white font-bold tracking-tight text-xl lg:text-2xl xl:text-3xl 2xl:text-3xl ml-4"
             variants={{
               hidden: { opacity: 0, x: -200 },
               visible: { opacity: 1, x: 0 },
@@ -204,7 +204,7 @@ export default function UsersPage() {
             Welcome {user.firstName}
           </motion.h1>
           <motion.h3
-            className="text-white font-bold tracking-wide relative left-[-1.3rem]"
+            className="text-white font-bold tracking-wide relative ml-5 xl:text-lg 2xl:text-lg"
             variants={{
               hidden: { opacity: 0, x: -200 },
               visible: { opacity: 1, x: 0 },
@@ -217,7 +217,7 @@ export default function UsersPage() {
           </motion.h3>
         </div>
         <motion.div
-          className="relative bottom-[-38rem] ml-[4rem]"
+          className="relative h-screen"
           variants={{
             hidden: { opacity: 0, x: -200 },
             visible: { opacity: 1, x: 0 },
@@ -228,7 +228,7 @@ export default function UsersPage() {
         >
           <Form method="post" action="/logout">
             <Button
-              className="ml-[4rem]  bg-orange-500 text-white"
+              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-16   bg-orange-500 text-white xl:text-lg 2xl:text-xl"
               type="submit"
             >
               Logout
@@ -236,12 +236,12 @@ export default function UsersPage() {
           </Form>
         </motion.div>
       </div>
-      <div className="rounded-l-[100px] h-screen w-full overflow-hidden bg-[#F8F8FF] relative right-[-2rem]">
-        <div className="relative mt-[10rem] ">
+      <div className="rounded-l-[50px] h-screen w-full overflow-hidden bg-[#F8F8FF] relative right-[-2rem]">
+        <div className="relative mt-[1rem] ">
           <div className="flex flex-col ml-8">
-            <div className="grid grid-cols-4">
+            <div className="grid grid-cols-4 gap-4 w-[95%] 2xl:mb-2">
               <motion.div
-                className="grid"
+                className="grid  xl:h-32 xl:ml-3  2xl:py-2"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -250,9 +250,9 @@ export default function UsersPage() {
                 animate="visible"
                 transition={{ duration: 1, delay: 0.5 }}
               >
-                <Card className="w-[300px] bg-gradient-to-r from-[#26218c] to-[#6f64e2]">
+                <Card className="bg-gradient-to-r from-[#26218c] to-[#6f64e2]">
                   <CardHeader>
-                    <CardTitle className="text-center text-white">
+                    <CardTitle className="text-center text-white 2xl:text-2xl">
                       Total Tasks
                     </CardTitle>
                   </CardHeader>
@@ -264,7 +264,7 @@ export default function UsersPage() {
                 </Card>
               </motion.div>
               <motion.div
-                className="grid"
+                className="grid xl:h-32 xl:ml-3  2xl:py-2"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -273,9 +273,9 @@ export default function UsersPage() {
                 animate="visible"
                 transition={{ duration: 1, delay: 0.8 }}
               >
-                <Card className="w-[300px] bg-gradient-to-r from-[#d7871d] to-[#e4f10c]">
+                <Card className="bg-gradient-to-r from-[#d7871d] to-[#e4f10c]">
                   <CardHeader>
-                    <CardTitle className="text-center text-white">
+                    <CardTitle className="text-center text-white 2xl:text-2xl">
                       Pending Tasks
                     </CardTitle>
                   </CardHeader>
@@ -287,7 +287,7 @@ export default function UsersPage() {
                 </Card>
               </motion.div>
               <motion.div
-                className="grid mr-[4rem]"
+                className="grid xl:h-32 xl:ml-3  2xl:py-2"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -296,9 +296,9 @@ export default function UsersPage() {
                 animate="visible"
                 transition={{ duration: 1, delay: 1.0 }}
               >
-                <Card className="w-[300px] bg-gradient-to-r from-[#82da50] to-[#11a62d]">
+                <Card className="bg-gradient-to-r from-[#82da50] to-[#11a62d]">
                   <CardHeader>
-                    <CardTitle className="text-center text-white">
+                    <CardTitle className="text-center text-white 2xl:text-2xl">
                       Completed Tasks
                     </CardTitle>
                   </CardHeader>
@@ -310,7 +310,7 @@ export default function UsersPage() {
                 </Card>
               </motion.div>
               <motion.div
-                className="grid mr-[4rem]"
+                className="grid xl:h-32 xl:ml-3  2xl:py-2"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -319,9 +319,9 @@ export default function UsersPage() {
                 animate="visible"
                 transition={{ duration: 1, delay: 1.0 }}
               >
-                <Card className="w-[300px] bg-gradient-to-r from-[#e86e6a] to-[#a62511]">
+                <Card className=" bg-gradient-to-r from-[#e86e6a] to-[#a62511]">
                   <CardHeader>
-                    <CardTitle className="text-center text-white">
+                    <CardTitle className="text-center text-white 2xl:text-2xl">
                       Cancelled Tasks
                     </CardTitle>
                   </CardHeader>
@@ -333,10 +333,10 @@ export default function UsersPage() {
                 </Card>
               </motion.div>
             </div>
-            <div className="w-[90%] h-0 border border-black mt-4 ml-4"></div>
-            <div className="flex flex-col ml-8">
+            <div className="w-[95%] xl:h-0 border border-black xl:mt-2 2xl:mt-6"></div>
+            <div className="flex flex-col  2xl:mt-2">
               <motion.div
-                className="flex mt-4 justify-evenly"
+                className="flex xl:mt-2 justify-between w-[95%]"
                 variants={{
                   hidden: { opacity: 0, x: -100 },
                   visible: { opacity: 1, x: 0 },
@@ -346,12 +346,12 @@ export default function UsersPage() {
                 transition={{ duration: 1, delay: 0.8 }}
               >
                 <Button
-                  className="relative left-[-9rem]"
+                  className="relative xl:ml-4 2xl:text-lg"
                   onClick={() => handleDownloadTasks()}
                 >
                   Download
                 </Button>
-                <div className="relative right-[-5rem]">
+                <div className="relative 2xl:text-lg">
                   <Pagination>
                     <PaginationContent>
                       <PaginationItem>
@@ -383,7 +383,7 @@ export default function UsersPage() {
                 </div>
               </motion.div>
               <motion.div
-                className="mt-4"
+                className="mt-2 xl:mt-2 2xl:mt-4 xl:mr-1"
                 variants={{
                   hidden: { opacity: 0, y: -100 },
                   visible: { opacity: 1, y: 0 },
@@ -392,19 +392,21 @@ export default function UsersPage() {
                 animate="visible"
                 transition={{ duration: 1, delay: 1.0 }}
               >
-                <Card className="w-[60rem] text-white bg-gray-900 shadow-lg shadow-gray-400 rounded-xl">
-                  <CardHeader className="text-center items-center ">
-                    <CardTitle className="text-center text-4xl ">
+                <Card className="w-[95%] text-white bg-gray-900 shadow-lg shadow-gray-400 rounded-xl">
+                  <CardHeader className="text-center items-center xl:p-2 ">
+                    <CardTitle className="text-center xl:text-3xl ">
                       Tasks
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="xl:p-2">
                     {/* Table Of All Pending Tasks */}
                     <Table>
-                      <TableCaption>A list of your pending tasks.</TableCaption>
+                      <TableCaption className="xl:mt-0 xl:px-0">
+                        A list of your pending tasks.
+                      </TableCaption>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="text-center">
+                          <TableHead className="text-center xl:h-6">
                             Vehicle Number
                           </TableHead>
                           <TableHead className="text-center">
@@ -419,18 +421,18 @@ export default function UsersPage() {
                       <TableBody>
                         {userTasksForPagination.map((item) => (
                           <TableRow key={item.id}>
-                            <TableCell className="text-center">
+                            <TableCell className="text-center xl:py-0">
                               {item.vehicleNumber.toUpperCase()}
                             </TableCell>
-                            <TableCell className="text-center">
+                            <TableCell className="text-center xl:py-0">
                               {item.ownerName}
                             </TableCell>
-                            <TableCell className="text-center">
+                            <TableCell className="text-center xl:py-0">
                               {item.ownerPhone}
                             </TableCell>
-                            <TableCell className="text-center">
+                            <TableCell className="text-center xl:py-0">
                               <Popover>
-                                <PopoverTrigger className="rounded-xl bg-black w-auto h-auto m-2 p-2 text-white">
+                                <PopoverTrigger className="rounded-xl bg-black w-auto h-auto xl:m-2 xl:p-2 text-white">
                                   Action
                                 </PopoverTrigger>
                                 <PopoverContent className="bg-gray-900 w-auto h-auto">

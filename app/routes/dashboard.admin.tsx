@@ -119,10 +119,10 @@ export default function Admin() {
   }));
 
   return (
-    <div className="flex flex-col md:flex-row bg-gray-900 h-screen w-full overflow-hidden">
-      <div className="flex flex-col gap-4 w-full md:w-[400px] h-screen">
+    <div className="flex bg-gray-900 h-screen w-full overflow-hidden absolute">
+      <div className="flex flex-col gap-4 w-[15rem] md:w-[16rem] lg:w-[21rem]">
         <motion.div
-          className="flex gap-4 w-full items-center mt-4 md:mt-[3.2rem] ml-4 md:ml-[2rem]"
+          className="flex gap-3 md:gap-4 w-full items-center mt-1 ml-4 "
           variants={{
             hidden: { opacity: 0, x: -200 },
             visible: { opacity: 1, x: 0 },
@@ -134,15 +134,15 @@ export default function Admin() {
           <img
             alt="logo"
             src="https://affordmotors.com/loan-recovery/assets/admin/dist/img/logo-new.png"
-            className="w-[33px] h-[33px] ml-4"
+            className="w-[33px] h-[33px] ml-1 mt-5"
           />
-          <h1 className="text-2xl md:text-4xl text-orange-600 font-bold tracking-tighter">
+          <h1 className="text-3xl sm:text-2xl md:text-xl lg:text-3xl text-orange-600 font-bold tracking-tighter mt-5 ">
             Afford Motors
           </h1>
         </motion.div>
-        <div className="mt-4 md:mt-[5rem] ml-4 md:ml-[6rem] flex flex-col gap-4">
+        <div className=" h-[300px] flex flex-col gap-4  justify-center items-center">
           <motion.h1
-            className="text-white font-bold tracking-tight text-xl md:text-2xl"
+            className="text-white font-bold tracking-tight text-xl lg:text-2xl  "
             variants={{
               hidden: { opacity: 0, x: -200 },
               visible: { opacity: 1, x: 0 },
@@ -154,7 +154,7 @@ export default function Admin() {
             Welcome {user.firstName}
           </motion.h1>
           <motion.h3
-            className="text-white font-bold tracking-wide relative left-[-1.3rem] text-sm md:text-base"
+            className="text-white font-bold tracking-wide relative "
             variants={{
               hidden: { opacity: 0, x: -200 },
               visible: { opacity: 1, x: 0 },
@@ -167,7 +167,7 @@ export default function Admin() {
           </motion.h3>
         </div>
         <motion.div
-          className="relative bottom-[-25rem] md:bottom-[-38rem] md:ml-[4rem] mt-4"
+          className="relative flex items-center justify-center h-screen"
           variants={{
             hidden: { opacity: 0, x: -200 },
             visible: { opacity: 1, x: 0 },
@@ -178,7 +178,7 @@ export default function Admin() {
         >
           <Form method="post" action="/logout">
             <Button
-              className="ml-4 sm:ml-[4rem] bg-orange-500 text-white"
+              className="bg-orange-500 text-white hover:bg-orange-600 px-6 py-3"
               type="submit"
             >
               Logout
@@ -186,10 +186,11 @@ export default function Admin() {
           </Form>
         </motion.div>
       </div>
-      <div className="rounded-l-[100px] h-screen w-full overflow-hidden bg-[#F8F8FF] relative right-[-2rem]">
-        <div className="relative mt-4 sm:mt-[10rem]">
-          <div className="flex flex-col sm:ml-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="hidden sm:block rounded-l-[35px] md:rounded-l-[35px] lg:rounded-l-[50px] h-screen w-[calc(100%)] md:w-[calc(100%)] lg:w-[calc(100%)] xl:w-[calc(100%)] overflow-hidden bg-[#F8F8FF]  ">
+        <div className="flex-1 space-y-5 p-3grid gap-6 md:grid-cols-4">
+          <div className="flex flex-col mx-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 ">
+              {/* grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4" */}
               <motion.div
                 className="grid"
                 variants={{
@@ -200,7 +201,7 @@ export default function Admin() {
                 animate="visible"
                 transition={{ duration: 1, delay: 0.5 }}
               >
-                <Card className="sm:w-[300px] bg-gradient-to-r from-[#26218c] to-[#6f64e2]">
+                <Card className="w-full bg-gradient-to-r from-[#26218c] to-[#6f64e2] shadow-lg">
                   <CardHeader>
                     <CardTitle className="text-center text-white">
                       Total Tasks
@@ -213,6 +214,7 @@ export default function Admin() {
                   </CardDescription>
                 </Card>
               </motion.div>
+
               <motion.div
                 className="grid"
                 variants={{
@@ -223,7 +225,7 @@ export default function Admin() {
                 animate="visible"
                 transition={{ duration: 1, delay: 0.8 }}
               >
-                <Card className="w-[300px] bg-gradient-to-r from-[#d7871d] to-[#e4f10c]">
+                <Card className="w-full bg-gradient-to-r from-[#d7871d] to-[#e4f10c] shadow-lg">
                   <CardHeader>
                     <CardTitle className="text-center text-white">
                       Pending Tasks
@@ -236,6 +238,7 @@ export default function Admin() {
                   </CardDescription>
                 </Card>
               </motion.div>
+
               <motion.div
                 className="grid"
                 variants={{
@@ -246,7 +249,7 @@ export default function Admin() {
                 animate="visible"
                 transition={{ duration: 1, delay: 1.0 }}
               >
-                <Card className="sm:w-[300px] bg-gradient-to-r from-[#82da50] to-[#11a62d]">
+                <Card className="w-full bg-gradient-to-r from-[#82da50] to-[#11a62d] shadow-lg">
                   <CardHeader>
                     <CardTitle className="text-center text-white">
                       Completed Tasks
@@ -259,6 +262,7 @@ export default function Admin() {
                   </CardDescription>
                 </Card>
               </motion.div>
+
               <motion.div
                 className="grid"
                 variants={{
@@ -267,9 +271,9 @@ export default function Admin() {
                 }}
                 initial="hidden"
                 animate="visible"
-                transition={{ duration: 1, delay: 1.0 }}
+                transition={{ duration: 1, delay: 1.2 }}
               >
-                <Card className="w-[300px] bg-gradient-to-r from-[#e86e6a] to-[#a62511]">
+                <Card className="w-full bg-gradient-to-r from-[#e86e6a] to-[#a62511] shadow-lg">
                   <CardHeader>
                     <CardTitle className="text-center text-white">
                       Cancelled Tasks
@@ -283,12 +287,17 @@ export default function Admin() {
                 </Card>
               </motion.div>
             </div>
-            <div className="w-[90%] h-0 border border-black mt-4 ml-4"></div>
-            <div className="mt-[20px] flex">
-              <BarChartComponent
-                chartConfig={monthWiseChartConfig}
-                chartData={monthWiseChartData}
-              />
+            <div className="w-[100%] h-0 border border-black mt-4"></div>
+
+            <div className="space-y-4 py-4">
+              <div className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
+                
+                  <BarChartComponent
+                    chartConfig={monthWiseChartConfig}
+                    chartData={monthWiseChartData}
+                  />
+                
+              </div>
             </div>
           </div>
         </div>
