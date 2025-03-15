@@ -18,6 +18,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardContent,
 } from "~/components/ui/card";
 import {
   Dialog,
@@ -132,12 +133,13 @@ export default function CompletedTasks() {
 
   if (loggedinUser && loggedinUser.role === "MODERATOR") {
     return (
-      <div className="flex-1 space-y-5 p-3grid gap-6 md:grid-cols-4">
-        <div className="flex flex-col mx-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 ">
-            {/* grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4" */}
+      <div className="mt-[1rem] ">
+        <div className="flex flex-col ml-8">
+          {/* Task summary cards */}
+          <div className="grid grid-cols-4 sm:gap-1 md:gap-4 w-[95%] mb-2 max-sm:grid max-sm:grid-cols-2 max-sm:grid-rows-2">
+            {/* Total Tasks Card */}
             <motion.div
-              className="grid"
+              className="grid h-32 sm:px-0 py-2 max-sm:p-1"
               variants={{
                 hidden: { opacity: 0, y: -100 },
                 visible: { opacity: 1, y: 0 },
@@ -146,22 +148,23 @@ export default function CompletedTasks() {
               animate="visible"
               transition={{ duration: 1, delay: 0.5 }}
             >
-              <Card className="w-full bg-gradient-to-r from-[#26218c] to-[#6f64e2] shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-center text-white">
+              <Card className="bg-gradient-to-r from-[#26218c] to-[#6f64e2] max-sm:min-w-0">
+                <CardHeader className="sm:p-4 md:p-4 lg:p-4">
+                  <CardTitle className="text-center text-white 2xl:text-2xl">
                     Total Tasks
                   </CardTitle>
                 </CardHeader>
                 <CardDescription>
-                  <p className="text-center mb-4 text-4xl text-orange-400">
+                  <p className="text-center mb-4 md:text-2xl lg:text-4xl text-orange-400">
                     {totalTaskCount}
                   </p>
                 </CardDescription>
               </Card>
             </motion.div>
 
+            {/* Pending Tasks Card */}
             <motion.div
-              className="grid"
+              className="grid h-32 sm:px-0 py-2 max-sm:p-1"
               variants={{
                 hidden: { opacity: 0, y: -100 },
                 visible: { opacity: 1, y: 0 },
@@ -170,22 +173,23 @@ export default function CompletedTasks() {
               animate="visible"
               transition={{ duration: 1, delay: 0.8 }}
             >
-              <Card className="w-full bg-gradient-to-r from-[#d7871d] to-[#e4f10c] shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-center text-white">
+              <Card className="bg-gradient-to-r from-[#d7871d] to-[#e4f10c] max-sm:min-w-0">
+                <CardHeader className="sm:p-3 md:p-3 lg:p-4">
+                  <CardTitle className="text-center text-white 2xl:text-2xl">
                     Pending Tasks
                   </CardTitle>
                 </CardHeader>
                 <CardDescription>
-                  <p className="text-center mb-4 text-4xl text-white">
+                  <p className="text-center mb-4 md:text-2xl lg:text-4xl text-white">
                     {pendingTasksCount}
                   </p>
                 </CardDescription>
               </Card>
             </motion.div>
 
+            {/* Completed Tasks Card */}
             <motion.div
-              className="grid"
+              className="grid h-32 sm:px-0 py-2 max-sm:p-1"
               variants={{
                 hidden: { opacity: 0, y: -100 },
                 visible: { opacity: 1, y: 0 },
@@ -194,48 +198,53 @@ export default function CompletedTasks() {
               animate="visible"
               transition={{ duration: 1, delay: 1.0 }}
             >
-              <Card className="w-full bg-gradient-to-r from-[#82da50] to-[#11a62d] shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-center text-white">
+              <Card className="bg-gradient-to-r from-[#82da50] to-[#11a62d] max-sm:min-w-0">
+                <CardHeader className="sm:p-3 md:p-3 lg:p-4">
+                  <CardTitle className="text-center text-white 2xl:text-2xl">
                     Completed Tasks
                   </CardTitle>
                 </CardHeader>
                 <CardDescription>
-                  <p className="text-center mb-4 text-4xl text-white">
+                  <p className="text-center mb-4 md:text-2xl lg:text-4xl text-white">
                     {completedTasksCount}
                   </p>
                 </CardDescription>
               </Card>
             </motion.div>
 
+            {/* Cancelled Tasks Card */}
             <motion.div
-              className="grid"
+              className="grid h-32 sm:px-1 py-2 max-sm:p-1"
               variants={{
                 hidden: { opacity: 0, y: -100 },
                 visible: { opacity: 1, y: 0 },
               }}
               initial="hidden"
               animate="visible"
-              transition={{ duration: 1, delay: 1.2 }}
+              transition={{ duration: 1, delay: 1.0 }}
             >
-              <Card className="w-full bg-gradient-to-r from-[#e86e6a] to-[#a62511] shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-center text-white">
+              <Card className="bg-gradient-to-r from-[#e86e6a] to-[#a62511] max-sm:min-w-0">
+                <CardHeader className="sm:p-3 md:p-3 lg:p-4">
+                  <CardTitle className="text-center text-white 2xl:text-2xl">
                     Cancelled Tasks
                   </CardTitle>
                 </CardHeader>
                 <CardDescription>
-                  <p className="text-center mb-4 text-4xl text-white">
+                  <p className="text-center mb-4 md:text-2xl lg:text-4xl text-white">
                     {cancelledTasksCount}
                   </p>
                 </CardDescription>
               </Card>
             </motion.div>
           </div>
-          <div className="w-[100%] h-0 border border-black mt-4"></div>
-          <div className="flex flex-col ">
+
+          {/* Divider */}
+          <div className="w-[95%] xl:h-0 border border-black md:mt-0 xl:mt-0 2xl:mt-6"></div>
+
+          <div className="flex flex-col w-full sm:mt-2 md:mt-3 xl:mt-0 2xl:mt-2">
+            {/* Download and Pagination */}
             <motion.div
-              className="flex mt-4 justify-evenly"
+              className="flex xl:mt-2 justify-between w-[95%] max-sm:m-2"
               variants={{
                 hidden: { opacity: 0, x: -100 },
                 visible: { opacity: 1, x: 0 },
@@ -245,17 +254,18 @@ export default function CompletedTasks() {
               transition={{ duration: 1, delay: 0.8 }}
             >
               <Button
-                className="relative left-[-9rem]"
+                className="xl:ml-4 2xl:text-lg max-sm:h-6 max-sm:px-1 max-sm:text-sm max-sm:mt-2 max-sm:mx-2"
                 onClick={() => handleDownloadTasks()}
               >
                 Download
               </Button>
-              <div className="relative right-[-10rem]">
-                <Pagination>
-                  <PaginationContent>
+              <div className="2xl:text-lg">
+                <Pagination className="max-sm:mx-0">
+                  <PaginationContent className="max-sm:gap-0">
                     <PaginationItem>
                       <PaginationPrevious
-                        href={`?page=${Math.max(1, parseInt(page) - 1)}`}
+                        href={`?page=${Math.max(1, Number.parseInt(page) - 1)}`}
+                        className="max-sm:px-0"
                       />
                     </PaginationItem>
                     {/* Loop through total pages to create pagination links */}
@@ -263,7 +273,8 @@ export default function CompletedTasks() {
                       <PaginationItem key={index + 1}>
                         <PaginationLink
                           href={`?page=${index + 1}`}
-                          isActive={index + 1 === parseInt(page)}
+                          isActive={index + 1 === Number.parseInt(page)}
+                          className="max-sm:w-4 max-sm:pl-1"
                         >
                           {index + 1}
                         </PaginationLink>
@@ -273,16 +284,19 @@ export default function CompletedTasks() {
                       <PaginationNext
                         href={`?page=${Math.min(
                           totalPages,
-                          parseInt(page) + 1
+                          Number.parseInt(page) + 1
                         )}`}
+                        className="max-sm:p-1.5"
                       />
                     </PaginationItem>
                   </PaginationContent>
                 </Pagination>
               </div>
             </motion.div>
+
+            {/* Tasks Table */}
             <motion.div
-              className="mt-4"
+              className="sm:mt-2 md:mt-2 xl:mt-2 2xl:mt-4 xl:mr-1"
               variants={{
                 hidden: { opacity: 0, y: -100 },
                 visible: { opacity: 1, y: 0 },
@@ -291,134 +305,133 @@ export default function CompletedTasks() {
               animate="visible"
               transition={{ duration: 1, delay: 1.0 }}
             >
-              <div className="w-full overflow-x-auto rounded-xl shadow-lg bg-gray-900 p-4">
-                <h1 className="text-3xl 2xl:text-4xl text-white text-center font-bold mb-4">
-                  Tasks
-                </h1>
-                <Table className="border-collapse border border-gray-900 w-full">
-                  <TableCaption className="text-md text-gray-500">
-                    A list of all completed tasks.
-                  </TableCaption>
-                  <TableHeader className="">
-                    <TableRow>
-                      <TableHead className="text-center text-l text-gray-500 font-bold py-2 ">
-                        Vehicle Number
-                      </TableHead>
-                      <TableHead className="text-center text-l text-gray-500 font-bold py-2 ">
-                        Owner Name
-                      </TableHead>
-                      <TableHead className="text-center text-l text-gray-500 font-bold py-2 ">
-                        Owner Phone Number
-                      </TableHead>
-                      <TableHead className="text-center text-l text-gray-500 font-bold py-2 ">
-                        Action
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {userTasksForPagination.map((item) => (
-                      <TableRow
-                        key={item.id}
-                        className="bg-gray-900 hover:bg-gray-800 transition duration-200"
-                      >
-                        <TableCell className="border-none text-center  text-white py-2 border ">
-                          {item.vehicleNumber.toUpperCase()}
-                        </TableCell>
-                        <TableCell className="border-none text-center text-white py-2 border">
-                          {item.ownerName}
-                        </TableCell>
-                        <TableCell className="border-none text-center text-white  py-2 border">
-                          {item.ownerPhone}
-                        </TableCell>
-                        <TableCell className="border-none text-center text-white py-2 border">
-                          <Dialog>
-                            <DialogTrigger asChild>
-                              <Button
-                                variant="ghost"
-                                className="bg-gradient-to-r to-gray-800 text-white hover:from-gray-600 hover:to-gray-700 px-4 py-2 rounded-lg"
-                              >
-                                View
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent className="sm:max-w-[600px] bg-gray-900 text-white rounded-2xl shadow-lg">
-                              <DialogHeader>
-                                <DialogTitle className="text-center text-2xl font-semibold">
-                                  Completed Task
-                                </DialogTitle>
-                              </DialogHeader>
-                              <div className="grid gap-6 py-4">
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label
-                                    htmlFor="vehicleNumber"
-                                    className="text-right text-gray-300 font-medium"
-                                  >
-                                    Vehicle Number
-                                  </Label>
-                                  <Input
-                                    id="vehicleNumber"
-                                    value={item.vehicleNumber.toUpperCase()}
-                                    readOnly={true}
-                                    className="col-span-3 text-center bg-gray-800 text-gray-300 border border-gray-600 rounded-lg"
-                                  />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label
-                                    htmlFor="ownerName"
-                                    className="text-right text-gray-300 font-medium"
-                                  >
-                                    Owner Name
-                                  </Label>
-                                  <Input
-                                    id="ownerName"
-                                    value={item.ownerName.toUpperCase()}
-                                    readOnly={true}
-                                    className="col-span-3 text-center bg-gray-800 text-gray-300 border border-gray-600 rounded-lg"
-                                  />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label
-                                    htmlFor="ownerPhone"
-                                    className="text-right text-gray-300 font-medium"
-                                  >
-                                    Owner Phone Number
-                                  </Label>
-                                  <Input
-                                    id="ownerPhone"
-                                    value={item.ownerPhone.toUpperCase()}
-                                    readOnly={true}
-                                    className="col-span-3 text-center bg-gray-800 text-gray-300 border border-gray-600 rounded-lg"
-                                  />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label
-                                  
-                                    htmlFor="uploadedImage"
-                                    className="text-right text-gray-300 font-medium"
-                                  >
-                                    Attachments
-                                  </Label>
-                                  <Link
-                                    to={item.uploadedImage || "#"}
-                                    id="uploadedImage"
-                                    className="col-span-3 text-center underline text-blue-400 hover:text-blue-600"
-                                  >
-                                    Uploaded Image
-                                  </Link>
-                                </div>
-                              </div>
-                              <DialogClose asChild>
-                                <Button className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
-                                  Close
-                                </Button>
-                              </DialogClose>
-                            </DialogContent>
-                          </Dialog>
-                        </TableCell>
+              <Card className="w-[95%] max-sm:w-auto text-white bg-gray-900 shadow-lg shadow-gray-400 rounded-xl">
+                <CardHeader className="text-center items-center max-sm:p-3 sm:p-2 md:p-2 xl:p-2">
+                  <CardTitle className="sm:text-2xl md:text-2xl xl:text-3xl max-sm:text-xl">
+                    Tasks
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="max-sm:p-2 md:p-1 xl:p-2">
+                  {/* Table Of All Pending Tasks */}
+                  <Table>
+                    <TableCaption className="sm:mt-0 md:mt-0 xl:mt-0 xl:px-0">
+                      A list of all completed tasks.
+                    </TableCaption>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="text-center  xl:h-6">
+                          Vehicle Number
+                        </TableHead>
+                        <TableHead className="text-center  ">
+                          Owner Name
+                        </TableHead>
+                        <TableHead className="text-center  ">
+                          Owner Phone Number
+                        </TableHead>
+                        <TableHead className="text-center  ">Action</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
+                    </TableHeader>
+                    <TableBody>
+                      {userTasksForPagination.map((item) => (
+                        <TableRow key={item.id}>
+                          <TableCell className="text-center sm:py-3 xl:py-0">
+                            {item.vehicleNumber.toUpperCase()}
+                          </TableCell>
+                          <TableCell className="text-center xl:py-0">
+                            {item.ownerName}
+                          </TableCell>
+                          <TableCell className="text-center xl:py-0">
+                            {item.ownerPhone}
+                          </TableCell>
+                          <TableCell className="border-none text-center text-white py-2 border">
+                            <Dialog>
+                              <DialogTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  className="bg-gradient-to-r to-gray-800 text-white hover:from-gray-600 hover:to-gray-700 px-4 py-2 rounded-lg"
+                                >
+                                  View
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent className="sm:max-w-[600px] bg-gray-900 text-white rounded-2xl shadow-lg">
+                                <DialogHeader>
+                                  <DialogTitle className="text-center text-2xl font-semibold">
+                                    Completed Task
+                                  </DialogTitle>
+                                </DialogHeader>
+                                <div className="grid gap-6 py-4">
+                                  <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label
+                                      htmlFor="vehicleNumber"
+                                      className="text-right text-gray-300 font-medium"
+                                    >
+                                      Vehicle Number
+                                    </Label>
+                                    <Input
+                                      id="vehicleNumber"
+                                      value={item.vehicleNumber.toUpperCase()}
+                                      readOnly={true}
+                                      className="col-span-3 text-center bg-gray-800 text-gray-300 border border-gray-600 rounded-lg"
+                                    />
+                                  </div>
+                                  <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label
+                                      htmlFor="ownerName"
+                                      className="text-right text-gray-300 font-medium"
+                                    >
+                                      Owner Name
+                                    </Label>
+                                    <Input
+                                      id="ownerName"
+                                      value={item.ownerName.toUpperCase()}
+                                      readOnly={true}
+                                      className="col-span-3 text-center bg-gray-800 text-gray-300 border border-gray-600 rounded-lg"
+                                    />
+                                  </div>
+                                  <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label
+                                      htmlFor="ownerPhone"
+                                      className="text-right text-gray-300 font-medium"
+                                    >
+                                      Owner Phone Number
+                                    </Label>
+                                    <Input
+                                      id="ownerPhone"
+                                      value={item.ownerPhone.toUpperCase()}
+                                      readOnly={true}
+                                      className="col-span-3 text-center bg-gray-800 text-gray-300 border border-gray-600 rounded-lg"
+                                    />
+                                  </div>
+                                  <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label
+                                      htmlFor="uploadedImage"
+                                      className="text-right text-gray-300 font-medium"
+                                    >
+                                      Attachments
+                                    </Label>
+                                    <Link
+                                      to={item.uploadedImage || "#"}
+                                      id="uploadedImage"
+                                      className="col-span-3 text-center underline text-blue-400 hover:text-blue-600"
+                                    >
+                                      Uploaded Image
+                                    </Link>
+                                  </div>
+                                </div>
+                                <DialogClose asChild>
+                                  <Button className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+                                    Close
+                                  </Button>
+                                </DialogClose>
+                              </DialogContent>
+                            </Dialog>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
         </div>

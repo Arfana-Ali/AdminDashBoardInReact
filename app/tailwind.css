@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply bg-[#e9e9f3] dark:bg-gray-950 ;
+  @apply bg-[#e9e9f3] dark:bg-gray-950;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
@@ -73,5 +73,13 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

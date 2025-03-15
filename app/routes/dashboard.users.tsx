@@ -347,6 +347,7 @@ export default function UsersPage() {
               </motion.div>
             </div>
 
+            {/* Divider */}
             <div className="w-[95%] xl:h-0 border border-black md:mt-0 xl:mt-0 2xl:mt-6"></div>
 
             <div className="flex flex-col w-full sm:mt-2 md:mt-3 xl:mt-0 2xl:mt-2">
