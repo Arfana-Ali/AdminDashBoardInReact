@@ -10,6 +10,9 @@ declare module "@remix-run/node" {
 }
 
 export default defineConfig({
+  ssr: {
+    noExternal: ["@radix-ui/react-select", "@radix-ui/number"],
+  },
   plugins: [
     remix({
       future: {
