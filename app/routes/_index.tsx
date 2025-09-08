@@ -9,7 +9,7 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader = async () => {
-  return redirect("/login");
+  return redirect("/signup");
 };
 
 export default function Index() {
