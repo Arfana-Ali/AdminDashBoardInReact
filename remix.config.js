@@ -1,9 +1,14 @@
+import { vercelPreset } from "@vercel/remix/vite";
+
 /** @type {import('@remix-run/dev').AppConfig} */
 export default {
+  presets: [vercelPreset()],   // Vercel ke liye zaroori
   ignoredRouteFiles: ["**/.*"],
-  server: "@vercel/remix",   // Vercel adapter use hoga
+
+  server: "@vercel/remix",     // Vercel adapter
   serverModuleFormat: "esm",
   serverPlatform: "node",
+
   future: {
     v3_fetcherPersist: true,
     v3_relativeSplatPath: true,
