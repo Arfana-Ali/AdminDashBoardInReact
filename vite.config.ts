@@ -4,7 +4,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import dotenv from "dotenv";
 dotenv.config();
 
-
 declare module "@remix-run/node" {
   interface Future {
     v3_singleFetch: true;
@@ -13,7 +12,20 @@ declare module "@remix-run/node" {
 
 export default defineConfig({
   ssr: {
-    noExternal: ["@radix-ui/react-select", "@radix-ui/number"],
+    noExternal: [
+      "@radix-ui/react-select",
+      "@radix-ui/number",
+      "lucide-react",
+      "@radix-ui/react-select",
+      "@radix-ui/number",
+      "@radix-ui/react-popover",
+      "@radix-ui/react-popper",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-use-escape-keydown",
+    ],
+  },
+  optimizeDeps: {
+    include: ["lucide-react"],
   },
   plugins: [
     remix({
